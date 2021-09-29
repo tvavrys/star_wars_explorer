@@ -1,0 +1,5 @@
+<div class="btn-group" role="group">
+  {% for tag in tags %}
+    <a href="{{ tag.url }}" class="btn btn-secondary{% if tag.is_active %} active{% endif %}">{{ tag.title }}</a>
+  {% endfor %}
+</div>

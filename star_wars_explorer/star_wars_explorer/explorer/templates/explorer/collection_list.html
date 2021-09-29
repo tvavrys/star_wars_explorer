@@ -1,0 +1,28 @@
+{% extends "explorer/base.html" %}{% load explorer %}
+
+
+{% block body %}
+  <form method="post" class="form">{% csrf_token %}
+    <div class="mb-2">
+      <h2>Collections</h2>
+      <button type="submit" class="btn btn-primary">Fetch collection</button> {# TODO button click disabled #}
+    </div>
+  </form>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Created</th>
+        <th scope="col">File Name</th>
+      </tr>
+    </thead>
+    <tbody>
+     {% for collection in object_list %}
+      <tr>
+        <td><a href="{% url 'collection-detail' pk=collection.pk %}">{{ collection.created }}<a/></td>
+        <td>{{ collection.csv_file }}</td>
+      </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+{% endblock%}

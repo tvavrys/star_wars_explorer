@@ -1,0 +1,31 @@
+{% extends 'explorer/base.html' %}{% load explorer %}
+    {% block body %}
+    <h2><a href="{% url 'collection-detail' pk=object.pk %}">{{ object.csv_file}}</a></h2>
+
+<div>
+    {% group_by_tags headers %}
+    <table class="table">
+        <thead>
+          <tr>
+            {% for header in headers %}
+            <th scope="col">{{ header }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+        {% for person in data %}
+        <tr>
+            {% for field in person %}
+            <td>{{ field }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% if has_next %}
+<a href="{% url 'collection-detail' pk=object.pk %}?page={{ next_page }}"
+    >Load More</a
+>
+{% endif %} {% endblock %}
